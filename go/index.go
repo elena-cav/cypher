@@ -13,16 +13,16 @@ func check(e error) {
 	}
 }
 func main() {
-	dat, _ := os.ReadFile("../prideAndPrejudice2.txt")
-	shift := -1
+	dat, _ := os.ReadFile("../prideAndPrejudice.txt")
+	shift := 2
 	start := time.Now()
-	var cyphered = cypher(shift, dat)
-	fmt.Println("Milliseconds to process:", time.Since(start))
+	cyphered := cypher(dat, shift)
+	fmt.Println("Performance:", time.Since(start), "milliseconds")
 	err := os.WriteFile("../cypheredGO.txt", cyphered.Bytes(), 0644)
 	check(err)
 }
 
-func cypher(shift int, text []byte) *bytes.Buffer {
+func cypher(text []byte, shift int) *bytes.Buffer {
 
 	buffer := bytes.NewBuffer([]byte{})
 	for _, s := range text {
